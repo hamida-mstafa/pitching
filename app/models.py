@@ -85,15 +85,13 @@ class Pitch(db.Model):
     which means that it references an id value from the users table
     '''
 
-#     def __repr__(self):
-#         return '{}'.format(self.body)
-#
-#
-# class Comments(db.Model):
-#     __tablename__='comments'
-#     id = db.Column(db.Integer,primary_key= True)
-#     details = db.Column(db.String(255))
-#     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-#
-#
+    def __repr__(self):
+        return '{}'.format(self.body)
+
+
+class Comments(db.Model):
+    __tablename__='comments'
+    id = db.Column(db.Integer,primary_key= True)
+    details = db.Column(db.String(255))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
