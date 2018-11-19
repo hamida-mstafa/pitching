@@ -65,26 +65,26 @@ class User(UserMixin, db.Model):
     def get_user(cls,id):
         users = User.query.filter_by(User.id=id).all()
         return users
-# class Pitch(db.Model):
-#     __tablename__= 'pitches'
-#     id = db.Column(db.Integer, primary_key=True)
-#     body = db.Column(db.String(140))
-#     category = db.Column(db.String(140))
-#     timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-#     @classmethod
-#     def retrieve_posts(cls,id):
-#         pitches = Pitch.filter_by(id=id).all()
-#         return pitches
-#     '''
-#     Pitch class represent the pitches Pitched by
-#     users. Timestamp is set to default and passsed datetime.utcnow--> function.
-#     SQLAlchemy will set the field to the value of calling that function
-#     and not the result of calling it without ()
-#     The user_id field is initialized as a foreign key to user.id,
-#     which means that it references an id value from the users table
-#     '''
-#
+class Pitch(db.Model):
+    __tablename__= 'pitches'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(140))
+    category = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    @classmethod
+    def retrieve_posts(cls,id):
+        pitches = Pitch.filter_by(id=id).all()
+        return pitches
+    '''
+    Pitch class represent the pitches Pitched by
+    users. Timestamp is set to default and passsed datetime.utcnow--> function.
+    SQLAlchemy will set the field to the value of calling that function
+    and not the result of calling it without ()
+    The user_id field is initialized as a foreign key to user.id,
+    which means that it references an id value from the users table
+    '''
+
 #     def __repr__(self):
 #         return '{}'.format(self.body)
 #
