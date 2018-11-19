@@ -1,0 +1,40 @@
+<div class="body_wrapper">
+    <div class="topspacer bgded overlay" style="background-image:url('static/images/bg.jpg');">
+      <div class="wrapper row0">
+        <div id="topbar" class="hoc clear">
+
+          <div class="fl_left">
+            <ul class="nospace">
+              <li><a href="index.html"><i class="fa fa-lg fa-home"></i></a></li>
+              {% if current_user.is_authenticated %}
+              <li><a href="{{url_for('auth.user_profile',username=current_user.username)}}">Profile</a></li>
+              <li style="color:white;padding:15px;">{{current_user.username}}</li>
+              <link rel="stylesheet" href="{{url_for('static',filename='css/font_awesome.css')}}">
+              <a href="{{url_for('auth.logout')}}" class="sign">Sign out</a>
+              {% else %}
+              <a href="{{url_for('auth.login')}}" class="sign">Sign In</a>
+              <a href="{{url_for('auth.register')}}" class="sign">Sign Up</a>
+              {%endif%}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper row1">
+        <header id="header" class="hoc clear">
+          <div id="logo" class="fl_left">
+            <h1><a href="/">OneMinutePitch</a></h1>
+          </div>
+          <nav id="mainav" class="fl_right">
+            <ul class="clear">
+              <li><a class="active" href="/pickuplines">Pickup Lines</a>
+
+              </li>
+              <li><a href="/technology">Technology</a>
+              </li>
+              <li><a href="/interview">Interview Pitch</a></li>
+              <li><a href="/sales">Sales Pitch</a></li>
+              <li><a href="/business">Business Pitch</a></li>
+            </ul>
+          </nav>
+        </header>

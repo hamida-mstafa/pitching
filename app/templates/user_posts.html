@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<body style="background-image: url('static/images/bg.jpg');">
+
+<div class="body_wrapper">
+          <div class="row0">
+              <div class="row">
+
+<a href="{{url_for('main.post')}}">
+        <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+        <div id="topbar" class="hoc clear">
+                <div style="text-align:center;font-weight:400; font-size:18px;">
+                      Add a post
+</div> </div></div></a>
+<div class="col-md-4"></div>
+
+
+<div class="col-md-4"></div>
+
+    {% for post in users_post %}
+    <div class="container" style="color:black;">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12 post">
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 post-header-line">
+                                <span class="glyphicon glyphicon-user"></span>
+                                by <a href="#">{{post.user}}</a> | <span class="glyphicon glyphicon-calendar">
+                                </span>{{post.timestamp}}| <span class="glyphicon glyphicon-comment"></span>
+                                <a id='reply' href="/comments/{{post.id}}">
+                                    Add Comments</a> | <i class="fa thumbs-up"></i>
+                                    <a href="#"></a> | <span class="glyphicon glyphicon-tags">
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="row" id="replyuser">
+                            <div class="col-md-4">
+
+                            </div>
+                                <div class="col-md-4">
+
+                                    </div>
+                        </div>
+                        <div class="row post-content">
+                            <div class="col-md-4">
+                                <p>
+                                    {{post.body}}
+                                <p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+</body>
+<script type="text/javascript">
+ $(document).ready(function() {
+            $("#replyuser").hide();
+
+            $("#reply").click(function() {
+
+                $("#replyuser").toggle(function() {
+
+              $("#reply").text("close");
+                });
+
+            });
+        });
+        </script>
+
+{% endblock %}

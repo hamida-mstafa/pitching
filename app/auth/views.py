@@ -9,7 +9,7 @@ from datetime import datetime
 from app.email import *
 from ..email import mail_message
 
-##################Registration route section#############
+#Registration route section#
 @auth.route('/register', methods = ['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -35,7 +35,7 @@ def register():
 
 
     '''
-##################End Registration route section#############
+#End Registration route section#
 
 
 
