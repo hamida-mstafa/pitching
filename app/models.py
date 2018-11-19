@@ -18,10 +18,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(120), index=True, unique = True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(130))
-    pitch = db.relationship('Pitch', backref='author', lazy='dynamic')
+    pitches = db.relationship('pitches', backref='author', lazy='dynamic')
     bio = db.Column(db.String(255))
     profile_pic = db.Column(db.String(255))
-    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
+    pitcheses = db.relationship('pitches',backref = 'user',lazy = "dynamic")
     comments = db.relationship('Comments', backref='user', lazy="dynamic")
 
 
@@ -65,8 +65,8 @@ class User(UserMixin, db.Model):
     def get_user(cls,id):
         users = User.query.filter_by(User.id=id).all()
         return users
-class Pitch(db.Model):
-    __tablename__= 'pitches'
+class pitches(db.Model):
+    __tablename__= 'pitcheses'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     category = db.Column(db.String(140))
@@ -74,10 +74,10 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     @classmethod
     def retrieve_posts(cls,id):
-        pitches = Pitch.filter_by(id=id).all()
-        return pitches
+        pitcheses = pitches.filter_by(id=id).all()
+        return pitcheses
     '''
-    Pitch class represent the pitches Pitched by
+    pitches class represent the pitcheses pitchesed by
     users. Timestamp is set to default and passsed datetime.utcnow--> function.
     SQLAlchemy will set the field to the value of calling that function
     and not the result of calling it without ()
@@ -93,5 +93,5 @@ class Comments(db.Model):
     __tablename__='comments'
     id = db.Column(db.Integer,primary_key= True)
     details = db.Column(db.String(255))
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    pitches_id = db.Column(db.Integer,db.ForeignKey('pitcheses.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

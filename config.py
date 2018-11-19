@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitch'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitches'
     SECRET_KEY=os.environ.get('SECRET_KEY') or '2015'
     MAIL_SERVER ='smtp.googlemail.com'
     MAIL_PORT = 587
@@ -15,12 +15,12 @@ class ProdConfig(Config):
     pass
 
 class DevConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitch'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitches'
     DEBUG = True
 class TestConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitch'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yego:pass123@localhost/minutepitches'
 
-config_options = {
+    config_options = {
 'development':DevConfig,
 'production':ProdConfig,
 'test':TestConfig
