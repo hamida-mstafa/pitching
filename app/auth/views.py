@@ -130,41 +130,4 @@ def edit_profile():
     If validate_on_submit() returns True the data is copied from the form into the user object and then writen the object to the database.
     '''
 
-    ###############End user profile route##############
-
-
-# @auth.route('/reset_password_request', methods=['GET', 'POST'])
-# def reset_password_request():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.index'))
-#     form = ResetPasswordRequestForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(email=form.email.data).first()
-#         if user:
-#             send_password_reset_email(user)
-#         flash('Check your email for the instructions to reset your password')
-#         return redirect(url_for('auth.login'))
-
-#     return render_template('email/reset_password_request.html',title='Reset Password', form=form)
-#     '''
-#     first, i make sure the user is not logged in,when the form is submitted and valid, i look up the user email provided in the form
-#     ,if the user is found, a password reset email will be sent using
-#     send_password_reset_email()
-#     '''
-
-    #########Rsetting password######
-
-# @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
-# def reset_password(token):
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.index'))
-#     user = User.verify_reset_password_token(token)
-#     if not user:
-#         return redirect(url_for('main.index'))
-#     form = ResetPasswordForm()
-#     if form.validate_on_submit():
-#         user.set_password(form.password.data)
-#         db.session.commit()
-#         flash('Your password has been reset.')
-#         return redirect(url_for('auth.login'))
-#     return render_template('email/reset_paword.html', form=form)
+    ##End user profile route###
