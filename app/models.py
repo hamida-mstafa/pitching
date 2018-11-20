@@ -18,10 +18,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(120), index=True, unique = True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(130))
-    pitches = db.relationship('pitches', backref='author', lazy='dynamic')
+    pitches = db.relationship('Pitches', backref='author', lazy='dynamic')
     bio = db.Column(db.String(255))
     profile_pic = db.Column(db.String(255))
-    pitcheses = db.relationship('pitches',backref = 'user',lazy = "dynamic")
     comments = db.relationship('Comments', backref='user', lazy="dynamic")
 
 
@@ -63,21 +62,27 @@ class User(UserMixin, db.Model):
 
     @classmethod
     def get_user(cls,id):
-        users = User.query.filter_by(User.id=id).all()
+        users = User.query.filter_by(User_id=id).all()
         return users
-class pitches(db.Model):
-    __tablename__= 'pitcheses'
+
+class Pitches(db.Model):
+    __tablename__= 'pitches'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     category = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def save_pitches(self):
+        db.session.add(self)
+        db.session.commit()
+
     @classmethod
     def retrieve_posts(cls,id):
-        pitcheses = pitches.filter_by(id=id).all()
-        return pitcheses
+        pitches = Pitches.query.filter_by(categoryid=id).all()
+        return pitches
     '''
-    pitches class represent the pitcheses pitchesed by
+    pitches class represent the pitches pitched by
     users. Timestamp is set to default and passsed datetime.utcnow--> function.
     SQLAlchemy will set the field to the value of calling that function
     and not the result of calling it without ()
@@ -93,5 +98,5 @@ class Comments(db.Model):
     __tablename__='comments'
     id = db.Column(db.Integer,primary_key= True)
     details = db.Column(db.String(255))
-    pitches_id = db.Column(db.Integer,db.ForeignKey('pitcheses.id'))
+    pitches_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

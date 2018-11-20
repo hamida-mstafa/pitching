@@ -3,9 +3,12 @@
 
 {% block content %}
 <body style="background-image: url('static/images/bg.jpg');">
-    <div id="pageintro" class="hoc clear">
+    <div id="pageintro" class="">
       <article>
         <p>Welcome to OneMinutePitch.</p>
+        {% for pitch in pitches%}
+        <p> {{pitch.body}}</p>
+        {% endfor %}
         <footer>
             {%if current_user.is_authenticated %}
 
