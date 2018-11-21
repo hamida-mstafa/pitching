@@ -19,11 +19,11 @@ def index():
     title = 'Welcome to woo'
     posts = [
     {
-        'author': {'username': 'John'},
+        'author': {'username': 'hamida'},
         'body': 'Beautiful day in Portland!'
     },
     {
-        'author': {'username': 'Susan'},
+        'author': {'username': 'amira'},
         'body': 'The Avengers movie was so cool!'
     }
     ]
@@ -83,7 +83,7 @@ def technology():
         details = form.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
+        new_comment = Comments(details = details,user =user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
@@ -91,14 +91,14 @@ def technology():
     return render_template('technology.html', technology = technology,form=form)
 
 @main.route('/sales' ,methods = ['GET','POST'])
-def technolog():
+def sales():
     sales = Pitches.query.filter_by(category = 'Sales').all()
     form = CommentForm()
     if form.validate_on_submit():
         details = form.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
+        new_comment = Comments(details = details,pitches_id=pitch,user =user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
@@ -114,7 +114,7 @@ def interview():
         details = form.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
+        new_comment = Comments(details = details,pitches_id=pitch,user =user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
@@ -128,7 +128,7 @@ def business():
         details = form.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
+        new_comment = Comments(details = details,pitches_id=pitch,user=user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
@@ -143,7 +143,7 @@ def pickuplines():
         details = form.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
+        new_comment = Comments(details = details,pitches_id=id,user =user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
@@ -164,21 +164,22 @@ def explore():
     return render_template('posts.html', title='Explore', posts=posts)
 
 
-@main.route('/comments/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_comment(id):
-    comment = Comments.query.filter_by(pitch_id=id).all()
-
-    form_comment = CommentForm()
-    if form_comment.validate_on_submit():
-        details = form_comment.details.data
-
-        new_comment = Comments(details = details,Pitches_id=id,user=current_user)
-        # # save comment
-        db.session.add(new_comment)
-        db.session.commit()
-
-    return render_template('comments.html',form_comment = form_comment,comment=comment)
+# @main.route('/comments/<int:id>', methods = ['GET','POST'])
+# @login_required
+# def new_comment(id):
+#     comment = Comments.query.filter_by(pitches_id=id).all()
+#     pitch = Pitches.query.filter_by(id=id)
+#
+#     form_comment = CommentForm()
+#     if form_comment.validate_on_submit():
+#         details = form_comment.details.data
+#
+#         new_comment = Comments(details = details,pitches_id=pitch,user=current_user)
+#         # # save comment
+#         db.session.add(new_comment)
+#         db.session.commit()
+#
+#     return render_template('comments.html',form_comment = form_comment,comment=comment)
 @main.route('/user/<username>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(username):
@@ -206,3 +207,23 @@ def user_profile(username):
     which works exactly like first() when there are results, and in case there
     are no results it auto sends a 404 error back
     '''
+
+
+@main.route('/comment/<int:pk>',methods=['GET','POST'])
+@login_required
+def comment(pk):
+    pitch =  Pitches.query.filter_by(id=pk).first()
+    comment = Comments.query.filter_by(pitches_id=pitch.id).all
+
+
+    commentform = CommentForm()
+    user = current_user
+    if commentform.validate_on_submit():
+        comm = commentform.details.data
+        print(pitch)
+        new_comment = Comments(user_id=user.id,details=comm,pitches_id=pitch.id)
+        db.session.add(new_comment)
+        print('It works')
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template("comments.html",commentform=commentform,pitch=pitch,comment=comment)

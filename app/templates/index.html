@@ -1,14 +1,25 @@
 {% extends "base.html" %}
-
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+{% endblock %}
 
 {% block content %}
-<body style="background-image: url('static/images/bg.jpg');">
-    <div id="pageintro" class="">
+
+<body style="background-color:grey;">
+  <div class="content">
+    <div id="pageintro">
       <article>
-        <p>Welcome to OneMinutePitch.</p>
+        <!-- <div class="jumbotron"> -->
+        <p class="well">Welcome to OneMinutePitch.</p>
+        <div class="row">
         {% for pitch in pitches%}
-        <p> {{pitch.body}}</p>
+          <div class='col-md-3'>
+        <p class="well"> {{pitch.body}}</p>
+        <a href="/comment/{{pitch.id}}">Comment</a>
+          </div>
         {% endfor %}
+      </div>
         <footer>
             {%if current_user.is_authenticated %}
 
@@ -19,9 +30,10 @@
             {% else%}</ul>
             <ul class="nospace inline pushright">
                 <li><a class="btn" href="/post">View Pitches</a></li>
-
+              </div>
             <li><a class="btn inverse" href="{{url_for('auth.register')}}">Join us today</a></li>
           </ul>{%endif %}
+        <!-- </div> -->
         </footer>
       </article>
     </div>
