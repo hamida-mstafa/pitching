@@ -16,7 +16,7 @@ def before_request():
 # @login_required
 def index():
 
-    title = 'Welcome to woo'
+    title = 'Welcome to the pitch'
     posts = [
     {
         'author': {'username': 'hamida'},
