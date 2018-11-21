@@ -385,16 +385,14 @@ a:hover { text-decoration:none; }
 .post .glyphicon { margin-right:5px; }
 .post-header-line { border-top:1px solid #DDD;border-bottom:1px solid #DDD;padding:5px 0px 5px 15px;font-size: 12px; }
 .post-content { padding-bottom: 15px;padding-top: 15px;}
-/* .content{
-  margin-left: 500px;
+.content{
+  margin-left: 300px;
   background-color: gray;
   opacity: 0.8;
-  width:400px;
+  width:900px;
   font-style:normal;
   font-family: sans-serif;
-  padding-left: 10px;
-  padding-right: 10px;
-} */
+}
 /* #image{
   background-repeat: no-repeat;
   background-size: contain; */

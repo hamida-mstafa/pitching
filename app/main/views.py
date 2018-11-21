@@ -209,11 +209,15 @@ def user_profile(username):
     '''
 
 
-@main.route('/comment/<int:pk>',methods=['GET','POST'])
+@main.route('/comments/<int:pk>',methods=['GET','POST'])
 @login_required
 def comment(pk):
+    id = 0
     pitch =  Pitches.query.filter_by(id=pk).first()
-    comment = Comments.query.filter_by(pitches_id=pitch.id).all
+    pitch_id = pk
+    print(pitch_id)
+    comment = Comments.query.filter_by(pitches_id=pitch_id).all()
+    print(comment)
 
 
     commentform = CommentForm()
