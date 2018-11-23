@@ -8,7 +8,6 @@ Pitching is an interactive app whereby users can share on their creative pitches
 
 # User stories :
    * As a user, I would like to see the pitches other people have posted.
-   * As a user, I would like to vote on the pitch they liked and give it  a downvote or upvote.
    * As a user, I would like to be signed in for me to leave a comment
    * As a user, I would like to receive a welcoming email once I sign up.
    * As a user, I would like to view the pitches I have created in my profile page.
